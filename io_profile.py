@@ -1,3 +1,4 @@
+from aimd import AIMD
 import numpy as np
 import time
 
@@ -8,13 +9,25 @@ bohr = 0.529177210903  # Angstrom
 dt_atom = 2.4188843265857e-2 # in units of fs
 
 
-if __name__ == '__main__'
-
+if __name__ == '__main__':
+    
+    """
     atoms = ['O', 'H', 'H']
     m_atoms = np.array([16, 1, 1])
     x_atoms = np.array([[0.000, 0.000, 0.000],
                         [0.000, 0.000, 1.000],
                         [0.943, 0.000, -0.333]]) / bohr
+    """
+ 
+    atoms = ['O', 'H', 'H', 'O', 'H', 'H']
+    m_atoms = np.array([16, 1, 1, 16, 1, 1])
+    x_atoms = np.array([[ 0.001,   0.000,   2.976],
+                        [ 0.932,  -0.000,   3.306],
+                        [ 0.000,  -0.000,   1.987],
+                        [-0.001,  -0.000,  -0.001],
+                        [-0.466,   0.808,  -0.329],
+                        [-0.466,  -0.808,  -0.329]]) / bohr
+    
 
     inds = np.zeros(len(atoms))
     v_atoms = np.zeros((len(atoms),3)) 
@@ -29,7 +42,7 @@ if __name__ == '__main__'
 
     t0 = time.time()
     i = 0
-    for t in range(100):
+    for t in range(1000):
         f.write('MODEL\n')
 
         for j in range(len(aimd.atoms)):
@@ -55,4 +68,5 @@ if __name__ == '__main__'
 
     f.close()
 
-   print('time spent: ', time.time()-t0)
+    print('time spent: ', time.time()-t0)
+
